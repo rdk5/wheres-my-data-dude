@@ -8,9 +8,9 @@ else:
     import got3 as got
 
 def main():
-	d1 = date(2013, 2, 18)  # start date
-	d2 = date(2013, 2, 25)  # end date
-	x = "Instant Mom"
+	d1 = date(2011, 11, 22)  # start date
+	d2 = date(2011, 11, 29)  # end date
+	x = "Stories I Only Tell My Friends"
 	for i in range(26):
 		print(d1)
 		print(d2)
