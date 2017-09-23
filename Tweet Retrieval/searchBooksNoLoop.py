@@ -8,24 +8,25 @@ else:
     import got3 as got
 
 def main():
-	d1 = date(2016, 10, 2)  # start date
-	d2 = date(2016, 10, 9)  # end date
+	d1 = date(2016, 10, 4)  # start date
+	d2 = date(2016, 10, 11)  # end date
+	x = "Born a Crime"
 	for i in range(26):
 		print(d1)
 		print(d2)
-		tweetCriteria = got.manager.TweetCriteria().setQuerySearch('Born a Crime').setSince(str(d1)).setUntil(str(d2))
+		tweetCriteria = got.manager.TweetCriteria().setQuerySearch(x).setSince(str(d1)).setUntil(str(d2))
 		tweet = got.manager.TweetManager.getTweets(tweetCriteria)
-		outputFileName = os.path.join("Born a Crime Data", "Born a Crime" + str(i) + ".csv")
+		outputFileName = os.path.join("Data", x + " Data", x + str(i) + ".csv")
 	
 		outputFile = codecs.open(outputFileName, "w+", "utf-8")
 
-		outputFile.write('username;date;retweets;favorites;text;geo;mentions;hashtags;id;permalink')
+		outputFile.write('username, date, retweets, text, id, permalink')
 
 		print('Searching...\n')
 
 		def receiveBuffer(tweets):
 			for t in tweets:
-				outputFile.write(('\n%s;%s;%d;%d;"%s";%s;%s;%s;"%s";%s' % (t.username, t.date.strftime("%Y-%m-%d %H:%M"), t.retweets, t.favorites, t.text, t.geo, t.mentions, t.hashtags, t.id, t.permalink)))
+				outputFile.write(('\n%s,%s,%d,"%s","%s",%s' % (t.username, t.date.strftime("%Y-%m-%d %H:%M"), t.retweets, t.text, t.id, t.permalink)))
 			outputFile.flush();
 			print('More %d saved on file...\n' % len(tweets))
 		got.manager.TweetManager.getTweets(tweetCriteria, receiveBuffer)

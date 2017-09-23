@@ -10,8 +10,8 @@ else:
 def main():
     #set values for searches
     book_titles = ["Born a Crime", "Bossypants", "Dad is Fat", "Stories I Only Tell My Friends", "The Girl with the Lower Back Tattoo", "Confessions of a Prairie Bitch", "Instant Mom", "Modern Romance", "I Can't Make This Up", "One More Thing"]
-    start_dates1 = [date(2016, 11, 15), date(2011, 7, 3), date(2014, 12, 29), date(2011, 4, 15), date(2016, 8, 16), date(2010, 6, 15), date(2013, 4, 2), date(2015, 6, 16), date(2017, 6, 6), date(2014, 2, 4)]
-    start_dates2 = [date(2016, 10, 9), date(201, 7, 10), date(2015, 1, 5)]
+    start_dates1 = [date(2016, 10, 4), date(2012, 12, 18), date(2015, 8, 18), date(2011, 11, 22), date(2016, 7, 5), date(2011, 5, 3), date(2013, 2, 18), date(2015, 5, 5), date(2017, 4, 25), date(2013, 12, 24)]
+    start_dates2 = [date(2016, 10, 11), date(2013, 12, 25), date(2015, 8, 25), date(2011, 11, 29), date(2016, 7, 12), date(2011, 5, 10), date(2013, 2, 25), date(2015, 5, 12), date(2017, 5, 2), date(2013, 12, 31)]
 
     #iterate through search parameters
     for x, y, z in zip(book_titles, start_dates1, start_dates2):
@@ -19,7 +19,7 @@ def main():
 	    d2 = z  # end date
 
         #iterate through weeks
-	    for i in range(1):
+	    for i in range(26):
 		    print("Checking for tweets between " + str(d1) + " and " + str(d2) + " about " + x)
 		    tweetCriteria = got.manager.TweetCriteria().setQuerySearch(x).setSince(str(d1)).setUntil(str(d2))
 		    tweet = got.manager.TweetManager.getTweets(tweetCriteria)
@@ -27,14 +27,14 @@ def main():
 	
 		    outputFile = codecs.open(outputFileName, "w+", "utf-8")
 
-		    outputFile.write('username;date;retweets;favorites;text;geo;mentions;hashtags;id;permalink')
+		    outputFile.write('username, date, retweets, text, id, permalink')
 
 		    print('Searching...\n')
 
             #write csv file with tweet information
 		    def receiveBuffer(tweets):
 			    for t in tweets:
-				    outputFile.write(('\n%s;%s;%d;%d;"%s";%s;%s;%s;"%s";%s' % (t.username, t.date.strftime("%Y-%m-%d %H:%M"), t.retweets, t.favorites, t.text, t.geo, t.mentions, t.hashtags, t.id, t.permalink)))
+				    outputFile.write(('\n%s,%s,%d,"%s","%s",%s' % (t.username, t.date.strftime("%Y-%m-%d %H:%M"), t.retweets, t.text, t.id, t.permalink)))
 			    outputFile.flush();
 			    print('More %d saved on file...\n' % len(tweets))
 		    got.manager.TweetManager.getTweets(tweetCriteria, receiveBuffer)
