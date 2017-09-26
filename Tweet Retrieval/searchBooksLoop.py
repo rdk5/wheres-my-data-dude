@@ -9,9 +9,9 @@ else:
 
 def main():
     #set values for searches
-    book_titles = ["Born a Crime", "Bossypants", /"Dad is Fat", "Stories I Only Tell My Friends", "The Girl with the Lower Back Tattoo", "Confessions of a Prairie Bitch", "Instant Mom", "Modern Romance", /"I Can't Make This Up", /"One More Thing"]
-    start_dates1 = [date(2016, 10, 4), date(2012, 12, 18), /date(2015, 8, 18), /date(2011, 11, 22), date(2016, 7, 5), date(2011, 5, 3), date(2013, 2, 18), date(2015, 5, 5), date(2017, 4, 25), date(2013, 12, 24)]
-    start_dates2 = [date(2016, 10, 11), date(2012, 12, 25), /date(2015, 8, 25), /date(2011, 11, 29), date(2016, 7, 12), date(2011, 5, 10), date(2013, 2, 25), date(2015, 5, 12), date(2017, 5, 2), date(2013, 12, 31)]
+    book_titles = ["Born a Crime", "Bossypants", "Dad is Fat", "Stories I Only Tell My Friends", "The Girl with the Lower Back Tattoo", "Confessions of a Prairie Bitch", "Instant Mom", "Modern Romance", /"I Can't Make This Up", /"One More Thing"]
+    start_dates1 = [date(2016, 10, 4), date(2012, 12, 18), date(2015, 8, 18), /date(2011, 11, 22), date(2016, 7, 5), date(2011, 5, 3), date(2013, 2, 18), date(2015, 5, 5), date(2017, 4, 25), date(2013, 12, 24)]
+    start_dates2 = [date(2016, 10, 11), date(2012, 12, 25), date(2015, 8, 25), /date(2011, 11, 29), date(2016, 7, 12), date(2011, 5, 10), date(2013, 2, 25), date(2015, 5, 12), date(2017, 5, 2), date(2013, 12, 31)]
 
     #iterate through search parameters
     for x, y, z in zip(book_titles, start_dates1, start_dates2):

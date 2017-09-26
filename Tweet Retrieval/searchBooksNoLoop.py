@@ -8,10 +8,10 @@ else:
     import got3 as got
 
 def main():
-	d1 = date(2011, 11, 22)  # start date
-	d2 = date(2011, 11, 29)  # end date
-	x = "Stories I Only Tell My Friends"
-	for i in range(26):
+	d1 = date(2015, 6, 30) # start date
+	d2 = date(2015, 7, 7)  # end date
+	x = "Modern Romance"
+	for i in range(7, 26):
 		print(d1)
 		print(d2)
 		tweetCriteria = got.manager.TweetCriteria().setQuerySearch(x).setSince(str(d1)).setUntil(str(d2))
