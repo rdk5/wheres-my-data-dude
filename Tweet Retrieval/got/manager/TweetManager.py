@@ -32,47 +32,50 @@ class TweetManager:
 				break
 			
 			for tweetHTML in tweets:
-				tweetPQ = PyQuery(tweetHTML)
-				tweet = models.Tweet()
-				
-				usernameTweet = tweetPQ("span:first.username.u-dir b").text();
-				txt = re.sub(r"\s+", " ", tweetPQ("p.js-tweet-text").text().replace('# ', '#').replace('@ ', '@'));
 				try:
+					tweetPQ = PyQuery(tweetHTML)
+					tweet = models.Tweet()
+				
+
+					usernameTweet = tweetPQ("span:first.username.u-dir b").text();
+					txt = re.sub(r"\s+", " ", tweetPQ("p.js-tweet-text").text().replace('# ', '#').replace('@ ', '@'));
+		
+				
 					retweets = int(tweetPQ("span.ProfileTweet-action--retweet span.ProfileTweet-actionCount").attr("data-tweet-stat-count").replace(",", ""));
-				except TypeError:
-					next
-				favorites = int(tweetPQ("span.ProfileTweet-action--favorite span.ProfileTweet-actionCount").attr("data-tweet-stat-count").replace(",", ""));
-				dateSec = int(tweetPQ("small.time span.js-short-timestamp").attr("data-time"));
-				id = tweetPQ.attr("data-tweet-id");
-				permalink = tweetPQ.attr("data-permalink-path");
+					favorites = int(tweetPQ("span.ProfileTweet-action--favorite span.ProfileTweet-actionCount").attr("data-tweet-stat-count").replace(",", ""));
+					dateSec = int(tweetPQ("small.time span.js-short-timestamp").attr("data-time"));
+					id = tweetPQ.attr("data-tweet-id");
+					permalink = tweetPQ.attr("data-permalink-path");
 				
-				geo = ''
-				geoSpan = tweetPQ('span.Tweet-geo')
-				if len(geoSpan) > 0:
-					geo = geoSpan.attr('title')
+					geo = ''
+					geoSpan = tweetPQ('span.Tweet-geo')
+					if len(geoSpan) > 0:
+						geo = geoSpan.attr('title')
 				
-				tweet.id = id
-				tweet.permalink = 'https://twitter.com' + permalink
-				tweet.username = usernameTweet
-				tweet.text = txt
-				tweet.date = datetime.datetime.fromtimestamp(dateSec)
-				tweet.retweets = retweets
-				tweet.favorites = favorites
-				tweet.mentions = " ".join(re.compile('(@\\w*)').findall(tweet.text))
-				tweet.hashtags = " ".join(re.compile('(#\\w*)').findall(tweet.text))
-				tweet.geo = geo
+					tweet.id = id
+					tweet.permalink = 'https://twitter.com' + permalink
+					tweet.username = usernameTweet
+					tweet.text = txt
+					tweet.date = datetime.datetime.fromtimestamp(dateSec)
+					tweet.retweets = retweets
+					tweet.favorites = favorites
+					tweet.mentions = " ".join(re.compile('(@\\w*)').findall(tweet.text))
+					tweet.hashtags = " ".join(re.compile('(#\\w*)').findall(tweet.text))
+					tweet.geo = geo
 				
-				results.append(tweet)
-				resultsAux.append(tweet)
+					results.append(tweet)
+					resultsAux.append(tweet)
 				
-				if receiveBuffer and len(resultsAux) >= bufferLength:
-					receiveBuffer(resultsAux)
-					resultsAux = []
+					if receiveBuffer and len(resultsAux) >= bufferLength:
+						receiveBuffer(resultsAux)
+						resultsAux = []
 				
-				if tweetCriteria.maxTweets > 0 and len(results) >= tweetCriteria.maxTweets:
-					active = False
-					break
-					
+					if tweetCriteria.maxTweets > 0 and len(results) >= tweetCriteria.maxTweets:
+						active = False
+						break
+
+				except:
+					print("Skipping a tweet!")	
 		
 		if receiveBuffer and len(resultsAux) > 0:
 			receiveBuffer(resultsAux)

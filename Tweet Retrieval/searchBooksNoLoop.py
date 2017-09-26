@@ -8,15 +8,15 @@ else:
     import got3 as got
 
 def main():
-	d1 = date(2015, 6, 30) # start date
-	d2 = date(2015, 7, 7)  # end date
+	d1 = date(2015, 6, 22) # start date
+	d2 = date(2015, 6, 29)  # end date
 	x = "Modern Romance"
-	for i in range(7, 26):
+	for i in range(1):
 		print(d1)
 		print(d2)
 		tweetCriteria = got.manager.TweetCriteria().setQuerySearch(x).setSince(str(d1)).setUntil(str(d2))
 		tweet = got.manager.TweetManager.getTweets(tweetCriteria)
-		outputFileName = os.path.join("Data", x + " Data", x + str(i) + ".csv")
+		outputFileName = os.path.join("Data", x + " Data", x + str(i) + "TestingData.csv")
 	
 		outputFile = codecs.open(outputFileName, "w+", "utf-8")
 
