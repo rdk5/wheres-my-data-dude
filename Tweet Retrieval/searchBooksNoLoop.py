@@ -8,15 +8,26 @@ else:
     import got3 as got
 
 def main():
+<<<<<<< HEAD
+	d1 = date(2015, 6, 22) # start date
+	d2 = date(2015, 6, 29)  # end date
+	x = "Modern Romance"
+	for i in range(1):
+=======
 	d1 = date(2016, 10, 4)  # start date
 	d2 = date(2016, 10, 11)  # end date
 	x = "Born a Crime"
 	for i in range(26):
+>>>>>>> 8cccb96f40c0fcdc05a3eb65bc9b3e97f52b06b7
 		print(d1)
 		print(d2)
 		tweetCriteria = got.manager.TweetCriteria().setQuerySearch(x).setSince(str(d1)).setUntil(str(d2))
 		tweet = got.manager.TweetManager.getTweets(tweetCriteria)
+<<<<<<< HEAD
+		outputFileName = os.path.join("Data", x + " Data", x + str(i) + "TestingData.csv")
+=======
 		outputFileName = os.path.join("Data", x + " Data", x + str(i) + ".csv")
+>>>>>>> 8cccb96f40c0fcdc05a3eb65bc9b3e97f52b06b7
 	
 		outputFile = codecs.open(outputFileName, "w+", "utf-8")
 
