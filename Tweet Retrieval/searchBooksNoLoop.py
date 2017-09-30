@@ -2,10 +2,8 @@
 import sys,getopt,datetime,codecs
 from datetime import date, timedelta
 import os
-if sys.version_info[0] < 3:
-    import got
-else:
-    import got3 as got
+import got
+
 
 def main():
 	d1 = date(2015, 4, 13) # start date
